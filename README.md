@@ -35,3 +35,49 @@ Clone the repository and install dependencies:
 git clone https://github.com/YourUsername/EchoSense.git
 cd EchoSense
 pip install -r requirements.txt
+````
+
+
+
+**Example Output:**
+
+```
+Input: I miss the sunflower fields.
+Emotion Scores: {'sadness': 2, 'joy': 1}
+Dominant Emotion: sadness
+```
+
+---
+
+## 📊 Roadmap
+
+* [ ] Add **visualizations** (bar charts, emotion wheels).
+* [ ] Integrate **machine learning classifiers** (Logistic Regression, SVM).
+* [ ] Fine-tune **transformer models** (BERT, RoBERTa) for nuanced detection.
+* [ ] Evaluate on datasets like **GoEmotions** and **EmpatheticDialogues**.
+* [ ] Build a **Streamlit-based web app** for interactive use.
+
+---
+
+## 📂 Project Structure
+
+```
+EchoSense/
+│
+├── data/                # datasets (e.g., NRC Lexicon, sample texts)
+├── src/                 # source code
+│   └── emotion_tool.py  # main script
+├── notebooks/           # experiments, prototypes
+├── requirements.txt     # dependencies
+└── README.md            # documentation
+```
+
+---
+
+## ✍️ Author
+
+**Bhavya Tripathy**
+
+* 🌿 *The Green Pad Poet*
+* 🎓 B.Tech CSE, Manipal University Jaipur
+* 💡 Research Interests: NLP, Affective Computing, AI for Mental Health
