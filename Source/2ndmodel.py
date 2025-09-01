@@ -7,7 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from io import StringIO
 
-# We'll use a lexicon-based approach as outlined in the EchoSense concept.
+# A comprehensive mock of a real emotion lexicon with a much wider range of words.
 nrc_emotion_lexicon = {
     'abandoned': ['sadness', 'fear'], 'alone': ['sadness', 'disgust'], 'amused': ['joy'],
     'anger': ['anger'], 'anxious': ['fear'], 'anticipation': ['anticipation'],
@@ -22,7 +22,26 @@ nrc_emotion_lexicon = {
     'scared': ['fear'], 'serene': ['calmness'], 'shock': ['surprise'], 'sorrow': ['sadness'],
     'surprise': ['surprise'], 'terrified': ['fear'], 'trust': ['trust'], 'unhappy': ['sadness'],
     'upset': ['sadness', 'anger'], 'worry': ['fear', 'sadness'], 'wound': ['pain', 'sadness'],
-    'sunflower': ['joy', 'calmness'], 'field': ['calmness'], 'home': ['joy', 'trust', 'nostalgia']
+    'sunflower': ['joy', 'calmness'], 'field': ['calmness'], 'home': ['joy', 'trust', 'nostalgia'],
+    # Expanded lexicon for a more nuanced analysis
+    'adored': ['joy', 'trust'], 'anxiety': ['fear', 'sadness'], 'bliss': ['joy'],
+    'brave': ['trust'], 'calmness': ['calmness', 'joy'], 'care': ['joy', 'trust'],
+    'celebration': ['joy', 'anticipation'], 'cold': ['sadness', 'disgust'], 'crushed': ['sadness'],
+    'darkness': ['fear', 'sadness'], 'dawn': ['anticipation', 'joy'], 'despair': ['sadness'],
+    'dream': ['joy', 'anticipation'], 'ecstasy': ['joy'], 'empty': ['sadness'],
+    'enraged': ['anger'], 'envy': ['disgust', 'anger'], 'euphoria': ['joy'],
+    'exuberant': ['joy'], 'fading': ['sadness'], 'faith': ['trust', 'anticipation'],
+    'fantastic': ['joy'], 'gloom': ['sadness'], 'gratitude': ['joy', 'trust'],
+    'haunted': ['fear'], 'heartbroken': ['sadness'], 'hopeful': ['anticipation', 'joy'],
+    'horror': ['fear', 'disgust'], 'hurt': ['sadness', 'anger'], 'inspire': ['joy', 'anticipation'],
+    'joyful': ['joy'], 'laugh': ['joy'], 'loneliness': ['sadness'], 'longing': ['sadness', 'anticipation'],
+    'magic': ['surprise', 'joy'], 'miserable': ['sadness'], 'mourn': ['sadness'],
+    'peace': ['calmness', 'trust'], 'pleasure': ['joy'], 'rage': ['anger'],
+    'relief': ['joy', 'calmness'], 'scared': ['fear'], 'shocked': ['surprise'],
+    'sorrowful': ['sadness'], 'suffering': ['sadness', 'pain'], 'surprise': ['surprise'],
+    'sympathy': ['trust', 'sadness'], 'tenderness': ['joy', 'trust'], 'thrill': ['joy', 'surprise'],
+    'torment': ['anger', 'pain'], 'tranquil': ['calmness', 'trust'], 'trapped': ['fear'],
+    'vibrant': ['joy', 'anticipation'], 'wonder': ['surprise', 'joy'], 'yearning': ['sadness', 'longing']
 }
 
 # Mapping our mock lexicon to your 8 core emotions with emojis
