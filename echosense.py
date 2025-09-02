@@ -336,3 +336,7 @@ with col2:
                 html_output += f"<span class='word-cloud-word {class_name}'>{word}</span> "
             else:
                 st.html
+
+                #this model is under development and is not fully functional yet
+                #goal for completion is to have a more nuanced emotion detection model
+
