@@ -7,8 +7,13 @@ import plotly.express as px
 import plotly.graph_objects as go
 from io import StringIO
 
+
+
+
+
+
+# --- Emotion Analysis Functions ---
 # We will now use a mock for a pre-trained, fine-tuned transformer model.
-# This model can understand the emotional context of a phrase, not just individual words.
 def analyze_emotions_transformer(text):
     """
     Simulates a fine-tuned transformer model's emotion prediction.
@@ -48,7 +53,15 @@ def analyze_emotions_transformer(text):
 # Mapping our mock lexicon to your 8 core emotions with emojis
 core_emotions = ['Joy 🎉', 'Sadness 😢', 'Anger 😡', 'Fear 😨', 'Trust 🤝', 'Anticipation ⏳', 'Disgust 🤢', 'Surprise 😲']
 
-# --- Sunset-Themed CSS ---
+
+
+
+
+
+
+
+
+# --- Main App CSS ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
@@ -56,48 +69,65 @@ st.markdown("""
     html, body, [class*="st-"] {
         font-family: 'Inter', sans-serif;
     }
-    .main {
-        background: linear-gradient(135deg, #FFDAB9, #FFB6C1, #A52A2A); /* Sunset gradient */
-        background-attachment: fixed;
+    
+    /* Sunset background image for the main app container */
+    [data-testid="stAppViewContainer"] {
+        background-image: url("https://wallpapercave.com/wp/wp5256714.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
-    .st-emotion-cache-1c5c5z {
-        border-radius: 12px;
-        padding: 30px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent card */
+    
+    /* Make header and sidebar transparent */
+    [data-testid="stHeader"] {
+        background-color: rgba(0,0,0,0);
     }
-    h1 {
-        color: #FF6347; /* Tomato Red */
-        font-weight: 800;
-        text-align: center;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    
+    /* Make the main content blocks semi-transparent */
+    div.block-container {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.6);
+    }
+
+    /* Style for the main title */
+    .custom-title {
         font-size: 3.5rem;
-    }
-    .header-tagline {
+        font-weight: bold;
+        color: EE7600; /* Coral for sunset feel */
         text-align: center;
-        color: #A0522D; /* Sienna Brown */
-        font-style: italic;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Style for section headers like "Input Text" */
+    .custom-header {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #FFA07A; /* Light Salmon */
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    }
+    
+    .header-tagline {
         font-size: 1.1rem;
-        margin-top: -15px;
+        color: #FFC0CB; /* Pink */
+        font-style: italic;
+        text-align: center;
+        margin-top: -10px;
     }
-    hr.sunflower-divider {
-        border: 0;
-        height: 2px;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #FF6347, rgba(0, 0, 0, 0));
-        margin-bottom: 2rem;
+
+    .sunflower-divider {
+        border: none;
+        height: 3px;
+        background: #FFD700; /* Gold */
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 2px;
+        box-shadow: 0px 2px 6px rgba(255, 215, 0, 0.6);
     }
-    .st-emotion-cache-1p6c99c {
-        border-radius: 12px;
-    }
-    .st-emotion-cache-13ko42a {
-        border-radius: 12px;
-        background-color: #FFFDE7;
-        border: 1px solid #FFECB3;
-        transition: box-shadow 0.3s ease-in-out;
-    }
-    .st-emotion-cache-13ko42a:focus-within {
-        box-shadow: 0 0 0 3px #FFD54F;
-    }
+    
+    /* --- Button Styles --- */
     .st-emotion-cache-19t5016 {
         background-color: #FF7F50; /* Coral */
         color: white;
@@ -112,6 +142,8 @@ st.markdown("""
         transform: translateY(-3px);
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
+
+    /* --- Results Card Styles --- */
     .result-card {
         background-color: rgba(255, 245, 238, 0.9); /* SeaShell */
         border-radius: 12px;
@@ -150,6 +182,8 @@ st.markdown("""
     .word-cloud-word:hover {
         transform: scale(1.1);
     }
+    
+    /* --- Emotion Word Colors --- */
     .emotion-highlight-joy { color: #FF7F50; } /* Coral */
     .emotion-highlight-sadness { color: #8A2BE2; } /* BlueViolet */
     .emotion-highlight-anger { color: #FF6347; } /* Tomato */
@@ -158,6 +192,7 @@ st.markdown("""
     .emotion-highlight-anticipation { color: #FFD700; } /* Gold */
     .emotion-highlight-surprise { color: #DA70D6; } /* Orchid */
     .emotion-highlight-disgust { color: #4B0082; } /* Indigo */
+
     .footer-text {
         text-align: center;
         font-style: italic;
@@ -169,9 +204,10 @@ st.markdown("""
         to { opacity: 1; transform: translateY(0); }
     }
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
-# Sample texts for the dropdown
+
+# --- Sample Data ---
 sample_texts = {
     "Select a Sample...": "",
     "Poem": "I miss the sunflower fields, they remind me of home. A warmth I can't touch, a memory to roam.",
@@ -181,7 +217,7 @@ sample_texts = {
 }
 
 # --- Main App Layout ---
-st.title("🌻 EchoSense")
+st.markdown("<h1 class='custom-title'>🌻 EchoSense</h1>", unsafe_allow_html=True)
 st.markdown("<p class='header-tagline'>Where poetry meets AI — decoding the hidden feelings in words.</p>", unsafe_allow_html=True)
 st.markdown("<hr class='sunflower-divider'>", unsafe_allow_html=True)
 
@@ -193,7 +229,7 @@ col1, col2 = st.columns([1, 1])
 
 with col1:
     st.markdown("<div class='container'>", unsafe_allow_html=True)
-    st.markdown("### 📝 Input Text")
+    st.markdown("<h3 class='custom-header'>📄 Input Text</h3>", unsafe_allow_html=True)
     
     st.markdown("""
         <p style='font-size: 0.9rem; color: #8D6E63;'>
